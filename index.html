@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Prototype of the new home page for пожоборонстрой.рф (upravlenie#288).
+     All texts come from the current site; nothing is invented.
+     Media slots: drop a file with the name shown on the slot into img/ and it
+     replaces the placeholder on reload; a missing file keeps the placeholder.
+     Not indexed: this is a draft for approval, not the company's site. -->
+<meta name="robots" content="noindex,nofollow">
+<title>АО «НТЦ «ПожОборонСтрой» — пожарная безопасность от проекта до эксплуатации</title>
+<meta name="description" content="Проектирование, монтаж и обслуживание систем противопожарной защиты и охраны для промышленных, гражданских и специальных объектов. Работаем с 2011 года.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f1a2b; --ink-2:#3a4659; --muted:#6b7686;
+  --bg:#ffffff; --bg-2:#f3f5f8; --line:#dde2ea;
+  --navy:#0d2240; --navy-2:#13305a; --red:#c8202f; --red-2:#a51a27;
+  --on-navy:#e8edf5; --on-navy-2:#a9b6ca;
+  --radius:6px; --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 16px}
+h1,h2,h3{line-height:1.2;margin:0}
+h2{font-size:clamp(26px,3.2vw,36px);font-weight:700;letter-spacing:-.01em}
+.eyebrow{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+section{padding:80px 0}
+.section-head{display:flex;flex-direction:column;gap:12px;margin-bottom:40px;max-width:720px}
+.section-head p{margin:0;color:var(--ink-2)}
+
+/* Draft banner */
+.draft{background:#fff4d6;color:#5c4400;font-size:13px;text-align:center;padding:8px 16px;border-bottom:1px solid #f0dd9e}
+.draft b{font-weight:600}
+
+/* Media slot: placeholder until the named file exists */
+.media{position:relative;margin:0;overflow:hidden;background:repeating-linear-gradient(135deg,#e9edf3 0 14px,#e2e7ef 14px 28px);border-radius:var(--radius)}
+.media::before{content:"";display:block;padding-top:var(--ratio,62.5%)}
+.media>img,.media>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media.filled>.ph{display:none}
+.ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:14px 16px;color:var(--ink-2);font-size:13px;line-height:1.4;overflow:auto}
+.ph b{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.ph code{font:500 12px/1.4 "IBM Plex Mono",monospace;color:var(--ink)}
+.ph details{margin-top:2px}
+.ph summary{cursor:pointer;font-weight:600;color:var(--navy-2)}
+.ph details p{margin:6px 0;font-size:12.5px}
+.ph .copy{font:600 12px "IBM Plex Sans",sans-serif;border:1px solid var(--line);background:#fff;border-radius:4px;padding:4px 10px;cursor:pointer}
+.r-16x9{--ratio:56.25%} .r-4x3{--ratio:75%} .r-3x2{--ratio:66.67%}
+
+/* Header */
+.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
+.brand img{width:44px;height:44px}
+.brand b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.brand span{display:block;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{text-decoration:none;font-size:14px;font-weight:500;color:var(--ink-2)}
+.nav a:hover{color:var(--red)}
+.top-phone{font-weight:600;text-decoration:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 22px;text-align:center;border-radius:var(--radius);font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;transition:background .15s}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-2)}
+.btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+/* Hero: background video or photo under a navy veil */
+.hero{background:var(--navy);color:var(--on-navy);padding:88px 0 0;position:relative;overflow:hidden}
+.hero-media{position:absolute;inset:0;border-radius:0;background:var(--navy)}
+.hero-media::before{display:none}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,34,64,.96) 0%,rgba(13,34,64,.85) 45%,rgba(13,34,64,.55) 100%)}
+.hero-media .ph{inset:24px 16px auto auto;width:min(340px,calc(100% - 32px));justify-content:flex-start;background:rgba(255,255,255,.94);border-radius:var(--radius);z-index:1;max-height:60%}
+.hero .wrap{position:relative;z-index:2}
+.hero .grid{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:end}
+.hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:700;letter-spacing:-.02em;color:#fff;margin:18px 0 20px}
+.hero h1 em{font-style:normal;color:#ff6b76}
+.hero .lead{font-size:18px;color:var(--on-navy-2);max-width:620px;margin:0 0 32px}
+.hero .fullname{font-size:13px;color:var(--on-navy-2);margin:0 0 6px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:64px}
+.hero-card{background:rgba(19,48,90,.92);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px;margin-bottom:64px}
+.hero-card h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-navy-2);margin-bottom:14px}
+.hero-card ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.hero-card li{display:flex;gap:10px;font-size:14px;line-height:1.45}
+.hero-card li::before{content:"";flex:0 0 8px;height:8px;margin-top:6px;background:var(--red);border-radius:1px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.12)}
+.fact{padding:26px 24px 30px 0}
+.fact+.fact{padding-left:24px;border-left:1px solid rgba(255,255,255,.12)}
+.fact b{display:block;font-size:30px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.fact span{font-size:14px;color:var(--on-navy-2)}
+
+/* Clients strip */
+.clients{padding:28px 0;background:var(--bg-2);border-bottom:1px solid var(--line)}
+.clients .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 36px}
+.clients small{font:500 12px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.clients span{font-weight:600;color:var(--ink-2);font-size:15px}
+
+/* Services */
+.services{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.svc{background:#fff;padding:0 0 26px}
+.svc .media{border-radius:0;margin-bottom:22px}
+.svc .num,.svc h3,.svc ul{margin-left:26px;margin-right:26px}
+.svc .num{font:500 12px/1 "IBM Plex Mono",monospace;color:var(--red);margin-bottom:12px}
+.svc h3{font-size:18px;font-weight:600;margin-bottom:12px}
+.svc ul{padding-left:18px;color:var(--ink-2);font-size:14px;line-height:1.55;margin-top:0;margin-bottom:0}
+.svc li+li{margin-top:4px}
+
+/* Objects */
+.objects-bg{background:var(--bg-2)}
+.objects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.obj{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.obj .media{border-radius:0}
+.obj .body{padding:22px 26px 26px;display:flex;flex-direction:column;gap:10px}
+.obj.big{grid-column:span 2;grid-row:span 2;background:var(--navy);color:var(--on-navy);border-color:var(--navy)}
+.obj .tag{font:500 11px/1 "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.obj.big .tag{color:#ff6b76}
+.obj h3{font-size:20px;font-weight:600}
+.obj.big h3{color:#fff;font-size:24px}
+.obj p{margin:0;font-size:14.5px;color:var(--ink-2)}
+.obj.big p{color:var(--on-navy-2);font-size:15.5px}
+
+/* About + licenses */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.about p{color:var(--ink-2);margin:0 0 16px}
+.about .media{margin-top:28px}
+.lic{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.lic li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.lic b{font:500 12px/1.6 "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--navy-2)}
+
+/* Contacts */
+.contacts{background:var(--navy);color:var(--on-navy)}
+.contacts h2{color:#fff}
+.contacts .section-head p{color:var(--on-navy-2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.cbox{background:var(--navy-2);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px}
+.cbox .big-link{display:block;font-size:clamp(22px,2.4vw,28px);font-weight:700;color:#fff;text-decoration:none;margin-bottom:6px;word-break:break-word}
+.cbox .big-link:hover{color:#ff6b76}
+.cbox p{margin:0 0 18px;color:var(--on-navy-2);font-size:14.5px}
+.contacts .media{height:100%;min-height:240px}
+.contacts .media::before{display:none}
+.req{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:0;font-size:14px}
+.req dt{color:var(--on-navy-2)}
+.req dd{margin:0;color:var(--on-navy);font-family:"IBM Plex Mono",monospace;font-size:13.5px;word-break:break-word}
+
+footer{background:#081629;color:var(--on-navy-2);font-size:13px;padding:24px 0}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+@media (max-width:960px){
+  .nav{display:none}
+  .top-phone{margin-left:auto}
+  .hero .grid{grid-template-columns:1fr;gap:0}
+  .hero-media .ph{position:relative;inset:auto;width:auto;margin:0 16px 16px;max-height:none}
+  .hero-media{position:relative;inset:auto;order:9}
+  .hero{display:flex;flex-direction:column}
+  .hero-media::after{display:none}
+  .hero-card{margin-bottom:40px}
+  .cta{margin-bottom:32px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .fact:nth-child(3){padding-left:0;border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid rgba(255,255,255,.12)}
+  .objects{grid-template-columns:1fr 1fr}
+  .about,.contact-grid{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:620px){
+  section{padding:56px 0}
+  .hero{padding-top:48px}
+  .top .wrap{height:60px}
+  .brand span{display:none}
+  .top .btn{display:none}
+  .objects{grid-template-columns:1fr}
+  .obj.big{grid-column:auto;grid-row:auto}
+  .fact{padding:20px 12px 22px 0}
+  .fact+.fact{padding-left:12px}
+  .fact:nth-child(3){padding-left:0}
+  .fact b{font-size:24px}
+  .lic li{grid-template-columns:1fr;gap:4px}
+}
+@media (max-width:440px){
+  .brand div{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="draft"><b>Прототип для согласования.</b> Не официальный сайт АО «НТЦ «ПожОборонСтрой». Полосатые блоки — места под фото и видео.</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <img src="logo.svg" alt="Логотип НТЦ «ПожОборонСтрой»">
+      <div><b>НТЦ «ПожОборонСтрой»</b><span>с 2011 года</span></div>
+    </a>
+    <nav class="nav">
+      <a href="#services">Деятельность</a>
+      <a href="#objects">Объекты</a>
+      <a href="#about">О компании</a>
+      <a href="#licenses">Лицензии</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="top-phone" href="tel:+74952150161">+7 (495) 215-01-61</a>
+    <a class="btn btn-red" href="mailto:info@ntcpos.ru">Написать</a>
+  </div>
+</header>
+
+<section class="hero">
+  <figure class="media hero-media">
+    <div class="ph"><b>Видео 00 · фон первого экрана</b><code>img/hero.mp4 + img/hero.jpg (кадр-заставка)</code><span>1920×1080, 8–15 с, без звука, зациклено</span>
+      <details><summary>Промпт для Gemini</summary><p>Кинематографичное видео 16:9, 10 секунд, медленный проезд камеры. Современный промышленный объект ночью: машинный зал с серверными стойками, под потолком красные трубопроводы автоматического пожаротушения и баллоны газового пожаротушения вдоль стены. Холодный синий свет, акценты красного, лёгкая дымка. Фотореализм, без людей, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div>
+    <img src="img/hero.jpg" alt="" onload="this.parentNode.classList.add('filled')" onerror="this.remove()">
+    <video src="img/hero.mp4" autoplay muted loop playsinline onloadeddata="this.parentNode.classList.add('filled')" onerror="this.remove()"></video>
+  </figure>
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">Надёжный партнёр на рынке безопасности</span>
+      <h1>Пожарная безопасность объектов — <em>от проекта до эксплуатации</em></h1>
+      <p class="fullname">Акционерное общество «Научно-технический центр «Пожарная безопасность в оборонном комплексе и в строительстве»</p>
+      <p class="lead">Промышленно-гражданские объекты, специальные объекты космического и военного назначения. Команда инженеров и учёных с опытом работы в проектных и научно-исследовательских институтах Министерства обороны.</p>
+      <div class="cta">
+        <a class="btn btn-red" href="tel:+74952150161">Позвонить: +7 (495) 215-01-61</a>
+        <a class="btn btn-ghost" href="mailto:info@ntcpos.ru">info@ntcpos.ru</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <h3>Полный цикл работ</h3>
+      <ul>
+        <li>Обследование зданий и сооружений</li>
+        <li>Проектирование и разработка СТУ</li>
+        <li>Закупка, монтаж и пуско-наладка</li>
+        <li>Техническое обслуживание</li>
+        <li>Огнезащитная обработка конструкций</li>
+      </ul>
+    </aside>
+  </div>
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><b>2011</b><span>основание на базе НИИЦ пожарной безопасности ВС РФ</span></div>
+      <div class="fact"><b>2</b><span>космодрома: «Плесецк» и «Восточный»</span></div>
+      <div class="fact"><b>5</b><span>лицензий и допусков: МЧС, ФСБ, Роскосмос, Минпромторг, проектные работы</span></div>
+      <div class="fact"><b>ISO 9001</b><span>и ГОСТ РВ 0015-002 — система менеджмента качества</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <div class="wrap">
+    <small>Работали на объектах</small>
+    <span>Роскосмос</span><span>ОАО «РЖД»</span><span>ПАО «Газпром»</span><span>ПАО АНК «Башнефть»</span><span>Минобороны России</span><span>ВМФ России</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Деятельность</span>
+      <h2>Десять направлений — один подрядчик</h2>
+      <p>Берём объект на любой стадии: от обследования и проекта до монтажа, сдачи и обслуживания.</p>
+    </div>
+    <div class="services">
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 01</b><code>img/svc-01.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: инженер в белой каске и светоотражающем жилете проводит обследование бетонной колонны в промышленном здании, в руках лазерный дальномер и планшет, видны трещины на бетоне. Естественный свет из окон, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-01.jpg" alt="Обследование зданий" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">01</div><h3>Обследование зданий и сооружений</h3>
+        <ul><li>обмерные работы, дефектовка конструкций</li><li>определение категорий технического состояния</li><li>техническое заключение и рекомендации</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 02</b><code>img/svc-02.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: рабочий стол проектировщика, два монитора с инженерными чертежами здания в САПР, распечатанные листы проекта, линейка и каска рядом. Спокойный офисный свет, малая глубина резкости, фотореализм, без читаемого текста и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-02.jpg" alt="Комплексное проектирование" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">02</div><h3>Комплексное проектирование</h3>
+        <ul><li>все разделы проектной документации</li><li>новое строительство, реконструкция, капремонт</li><li>по постановлению правительства РФ № 87</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 03</b><code>img/svc-03.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: техническое помещение с вентиляционными установками и оцинкованными воздуховодами большого сечения под потолком, аккуратный монтаж, ракурс снизу. Холодный свет, фотореализм, без людей и надписей.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-03.jpg" alt="Отопление и вентиляция" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">03</div><h3>Отопление, вентиляция, кондиционирование</h3>
+        <ul><li>ОВ, ТС, ХС, ТМ, противодымная защита</li><li>проектная и рабочая документация</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 04</b><code>img/svc-04.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: двое инженеров за столом переговоров рассматривают большой план эвакуации здания и схему пожарных отсеков, рядом ноутбук с расчётной моделью распространения дыма. Деловая обстановка, фотореализм, лица не в фокусе, без логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-04.jpg" alt="Разработка СТУ" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">04</div><h3>Разработка и согласование СТУ</h3>
+        <ul><li>специальные технические условия</li><li>расчёт пожарных рисков</li><li>категорирование по взрывопожарной опасности</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 05</b><code>img/svc-05.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: ряд красных баллонов автоматической установки газового пожаротушения с манометрами и распределительным трубопроводом в техническом помещении, рядом шкаф управления. Чистый промышленный интерьер, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-05.jpg" alt="Противопожарная защита" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">05</div><h3>Противопожарная защита</h3>
+        <ul><li>пожарная сигнализация</li><li>оповещение и управление эвакуацией</li><li>автоматические установки пожаротушения</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 06</b><code>img/svc-06.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: открытый телекоммуникационный шкаф с аккуратно уложенными кабелями витой пары и коммутаторами, синие и белые кабели, индикаторы светятся. Крупный план, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-06.jpg" alt="Слаботочные системы" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">06</div><h3>Слаботочные системы</h3>
+        <ul><li>охранная сигнализация, СКУД, видеонаблюдение</li><li>периметровые средства, СКС</li><li>радиофикация, телефония, диспетчеризация</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 07</b><code>img/svc-07.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: периметр промышленного объекта в сумерках, ограждение с периметровыми датчиками, камеры видеонаблюдения на столбе, прожекторы. Сине-серая гамма, фотореализм, без людей, надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-07.jpg" alt="Технические средства охраны" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">07</div><h3>Технические средства охраны</h3>
+        <ul><li>предпроектное обследование и варианты ТСО</li><li>согласование в контролирующих органах</li><li>гарантийное и постгарантийное обслуживание</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 08</b><code>img/svc-08.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: монтажник в каске на передвижной вышке крепит красный трубопровод пожаротушения под потолком строящегося цеха, вид снизу, рабочий процесс. Дневной свет, фотореализм, лицо не крупно, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-08.jpg" alt="Монтаж и пуско-наладка" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">08</div><h3>Закупка, монтаж и пуско-наладка</h3>
+        <ul><li>системы противопожарной защиты</li><li>ТСО и слаботочные системы</li><li>системы дымоудаления</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 09</b><code>img/svc-09.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: инженер в спецодежде проверяет приёмно-контрольный прибор пожарной сигнализации на стене, открытая панель, в руках мультиметр и чек-лист. Крупный план рук и прибора, фотореализм, без читаемых надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-09.jpg" alt="Техническое обслуживание" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">09</div><h3>Техническое обслуживание</h3>
+        <ul><li>АПС и автоматическое пожаротушение</li><li>СОУЭ и дымоудаление</li><li>противопожарный водопровод</li></ul></div>
+      <div class="svc">
+        <figure class="media"><div class="ph"><b>Фото 10</b><code>img/svc-10.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: рабочий в защитном костюме и респираторе наносит огнезащитный состав краскопультом на стальные балки металлоконструкции, мелкая взвесь в луче света. Фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/svc-10.jpg" alt="Огнезащитная обработка" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="num">10</div><h3>Огнезащитная обработка</h3>
+        <ul><li>металлические и деревянные конструкции</li><li>кровля, воздуховоды</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="objects" class="objects-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Наши объекты</span>
+      <h2>Где наши системы уже работают</h2>
+      <p>Для объектов лучше реальные фото с площадок; сгенерированная картинка — временная иллюстрация.</p>
+    </div>
+    <div class="objects">
+      <article class="obj big">
+        <figure class="media r-16x9"><div class="ph"><b>Фото или видео 11</b><code>img/obj-1.jpg · 1920×1080</code><details><summary>Промпт для Gemini</summary><p>Фото 16:9: стартовый комплекс космодрома на рассвете, ракета-носитель на пусковом столе, мачты обслуживания и прожекторы, тайга вдали, лёгкий пар у основания. Эпичный широкий план, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-1.jpg" alt="Космодром «Восточный»" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Роскосмос</span>
+          <h3>Космодром «Восточный»</h3>
+          <p>Системы водяного и водопенного пожаротушения на базе пожарных роботов, газовое пожаротушение. Проектные и конструкторские работы, СТУ, пожарная сигнализация и управление эвакуацией, монтаж и испытания. Задачи выполнены в срок — к запуску ракеты-носителя «Союз-2.1а».</p>
+        </div>
+      </article>
+      <article class="obj">
+        <figure class="media"><div class="ph"><b>Фото 12</b><code>img/obj-2.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: северный космодром зимой, стартовый комплекс среди заснеженного леса, металлические конструкции башни обслуживания, холодное небо. Фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-2.jpg" alt="Космодром «Плесецк»" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Роскосмос</span>
+          <h3>Космодром «Плесецк»</h3>
+          <p>Стартовый комплекс «Ангара»: разработан, изготовлен и поставлен комплект технологических средств противопожарной защиты 14И732.</p>
+        </div>
+      </article>
+      <article class="obj">
+        <figure class="media"><div class="ph"><b>Фото 13</b><code>img/obj-3.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: современный яхт-клуб на берегу Финского залива, стеклянный фасад, причал с яхтами, вечерний свет. Архитектурная фотография, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-3.jpg" alt="Яхт-клуб и Академия тенниса" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Санкт-Петербург</span>
+          <h3>Яхт-клуб и Академия тенниса</h3>
+          <p>Уникальные сооружения без нормативных требований: разработаны СТУ и мероприятия, документация согласована в МЧС.</p>
+        </div>
+      </article>
+      <article class="obj">
+        <figure class="media"><div class="ph"><b>Фото 14</b><code>img/obj-4.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: зал железнодорожных билетных касс в историческом здании вокзала, окна касс, купольная камера видеонаблюдения под потолком. Тёплый свет, фотореализм, без людей крупным планом, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-4.jpg" alt="Билетные кассы Ярославского вокзала" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Москва</span>
+          <h3>Билетные кассы Ярославского вокзала</h3>
+          <p>Оснащение здания охранными средствами и оборудованием по проектно-сметной документации.</p>
+        </div>
+      </article>
+      <article class="obj">
+        <figure class="media"><div class="ph"><b>Фото 15</b><code>img/obj-5.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: стеклянный бизнес-центр класса А в Москве, вид снизу на фасад, синее небо. Архитектурная фотография, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-5.jpg" alt="БЦ «Гранд Сетунь Плаза»" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Москва</span>
+          <h3>БЦ «Гранд Сетунь Плаза»</h3>
+          <p>Проект пожарной сигнализации и СОУЭ, монтаж, пуско-наладка, сдача в эксплуатацию.</p>
+        </div>
+      </article>
+      <article class="obj">
+        <figure class="media"><div class="ph"><b>Фото 16</b><code>img/obj-6.jpg · 1600×1000</code><details><summary>Промпт для Gemini</summary><p>Фото 16:10: большой выставочный павильон военно-технического форума под открытым небом, ряды техники и шатры, пожарный щит и огнетушители на переднем плане. Дневной свет, фотореализм, без надписей и логотипов.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/obj-6.jpg" alt="Форум «Армия-2015»" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+        <div class="body">
+          <span class="tag">Форум</span>
+          <h3>«Армия-2015»</h3>
+          <p>Комплексное обеспечение пожарной безопасности международного военно-технического форума.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <div class="section-head" style="margin-bottom:24px">
+        <span class="eyebrow">О компании</span>
+        <h2>Научная база оборонного комплекса</h2>
+      </div>
+      <p>АО «НТЦ «ПожОборонСтрой» основано в 2011 году на базе «Научно-исследовательского испытательного центра пожарной безопасности ВС РФ», входящего в состав ФГУП «26 ЦНИИ МО РФ».</p>
+      <p>Сегодня это динамично развивающееся предприятие, чья работа давно вышла за рамки первоначального назначения: от специальных объектов космического и военного назначения до промышленных и гражданских зданий.</p>
+      <p>Филиал — ООО «НИЦ «ПожОборонЭксперт»: оценка пожарного риска, декларации пожарной безопасности, раздел 9 проектов, экспертиза и расчёты.</p>
+      <figure class="media r-4x3"><div class="ph"><b>Фото 17 · команда</b><code>img/about.jpg · 1600×1200</code><details><summary>Промпт для Gemini</summary><p>Фото 4:3: группа из пяти инженеров разного возраста в офисе проектного института обсуждает чертежи на большом столе, на стене схема объекта. Деловой стиль, естественный свет, фотореализм, без логотипов и читаемого текста. Лучше заменить реальным фото команды.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/about.jpg" alt="Команда" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+    </div>
+    <div id="licenses">
+      <div class="section-head" style="margin-bottom:24px">
+        <span class="eyebrow">Лицензии и допуски</span>
+        <h2>Допущены к сложному</h2>
+      </div>
+      <ul class="lic">
+        <li><b>МЧС</b><span>Монтаж, техническое обслуживание и ремонт средств обеспечения пожарной безопасности зданий и сооружений</span></li>
+        <li><b>ФСБ</b><span>Работы, связанные с использованием сведений, составляющих государственную тайну</span></li>
+        <li><b>РОСКОСМОС</b><span>Осуществление космической деятельности</span></li>
+        <li><b>МИНПРОМТОРГ</b><span>Разработка, производство, испытание, монтаж, обслуживание и ремонт вооружения и военной техники</span></li>
+        <li><b>ДОПУСК</b><span>Допуск к проектным работам, включая особо опасные и технически сложные объекты</span></li>
+        <li><b>ISO 9001</b><span>Сертификат СМК по ГОСТ ИСО 9001-2015 и ГОСТ РВ 0015-002-2012</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="contacts">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Контакты</span>
+      <h2>Обсудим ваш объект</h2>
+      <p>Позвоните или напишите — подскажем, с чего начать: обследование, проект или монтаж.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cbox">
+        <a class="big-link" href="tel:+74952150161">+7 (495) 215-01-61</a>
+        <p>Телефон / факс</p>
+        <a class="big-link" href="mailto:info@ntcpos.ru">info@ntcpos.ru</a>
+        <p>Электронная почта</p>
+        <p style="margin:0">111024, г. Москва, ул. 2-я Энтузиастов, д. 5, к. 40, помещ. 8/3</p>
+      </div>
+      <div class="cbox">
+        <dl class="req">
+          <dt>ОГРН</dt><dd>1117746360412</dd>
+          <dt>ИНН</dt><dd>7720717475</dd>
+          <dt>КПП</dt><dd>772001001</dd>
+          <dt>Р/с</dt><dd>40702810300000245500</dd>
+          <dt>Банк</dt><dd>ПАО «Промсвязьбанк», г. Москва</dd>
+          <dt>К/с</dt><dd>30101810400000000555</dd>
+          <dt>БИК</dt><dd>044525555</dd>
+        </dl>
+      </div>
+      <figure class="media"><div class="ph"><b>Фото 18 · офис или карта</b><code>img/contacts.jpg · 1200×1200</code><details><summary>Промпт для Gemini</summary><p>Фото 1:1: вход в современное офисное здание в Москве, стеклянные двери, табличка без текста, вечерний свет. Фотореализм, без логотипов. Лучше заменить реальным фото входа или картой проезда.</p><button class="copy" type="button">Скопировать</button></details></div><img src="img/contacts.jpg" alt="Офис" loading="lazy" onload="this.parentNode.classList.add('filled')" onerror="this.remove()"></figure>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2011–2026 АО «НТЦ «ПожОборонСтрой»</span>
+    <span>пожоборонстрой.рф</span>
+  </div>
+</footer>
+
+<script>
+// Copy a Gemini prompt to the clipboard from its placeholder.
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.copy');
+  if (!btn) return;
+  navigator.clipboard.writeText(btn.previousElementSibling.textContent)
+    .then(() => { btn.textContent = 'Скопировано'; setTimeout(() => btn.textContent = 'Скопировать', 1500); });
+});
+</script>
+</body>
+</html>

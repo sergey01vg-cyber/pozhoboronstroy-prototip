@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154" role="img" aria-label="ПОС">
+  <!-- Vector redraw of the original 150 px logo: interlocked П, О, С with a
+       bottom-left extrusion. Each link is drawn whole, then the crossing that
+       must lie on top is redrawn through a clip, as in a chain. -->
+  <defs>
+    <path id="p" fill-rule="evenodd" d="M4,148 V76 Q4,72 8,72 H75 Q79,72 79,76 V148 H64 V87 H20 V148 Z"/>
+    <path id="o" fill-rule="evenodd" d="M43,37 H111 Q115,37 115,41 V109 Q115,113 111,113 H43 Q39,113 39,109 V41 Q39,37 43,37 Z M55,53 V97 H99 V53 Z"/>
+    <path id="c" fill-rule="evenodd" d="M79,4 H147 Q151,4 151,8 V27 H135 V19 H91 V61 H135 V53 H151 V73 Q151,77 147,77 H79 Q75,77 75,73 V8 Q75,4 79,4 Z"/>
+    <g id="red">
+      <use href="#p" fill="#8c0c12" transform="translate(-3,3)"/>
+      <use href="#p" fill="#8c0c12" transform="translate(-1.5,1.5)"/>
+      <use href="#p" fill="#e3141d" stroke="#1b1b1b" stroke-width="1"/>
+    </g>
+    <g id="blue">
+      <use href="#o" fill="#0c2f8f" transform="translate(-3,3)"/>
+      <use href="#o" fill="#0c2f8f" transform="translate(-1.5,1.5)"/>
+      <use href="#o" fill="#1f5fe6" stroke="#1b1b1b" stroke-width="1"/>
+    </g>
+    <g id="white">
+      <use href="#c" fill="#8f949b" transform="translate(-3,3)"/>
+      <use href="#c" fill="#8f949b" transform="translate(-1.5,1.5)"/>
+      <use href="#c" fill="#f6f7f8" stroke="#1b1b1b" stroke-width="1"/>
+    </g>
+    <clipPath id="redOverBlue"><rect x="30" y="66" width="28" height="28"/></clipPath>
+    <clipPath id="blueOverWhite"><rect x="93" y="56" width="26" height="28"/></clipPath>
+  </defs>
+  <use href="#red"/>
+  <use href="#blue"/>
+  <use href="#white"/>
+  <use href="#p" fill="#e3141d" stroke="#1b1b1b" stroke-width="1" clip-path="url(#redOverBlue)"/>
+  <use href="#o" fill="#1f5fe6" stroke="#1b1b1b" stroke-width="1" clip-path="url(#blueOverWhite)"/>
+</svg>
